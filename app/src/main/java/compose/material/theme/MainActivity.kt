@@ -31,6 +31,9 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import compose.material.theme.ui.theme.Material3ComposeTheme
 
+/*
+* Ref : https://www.boltuix.com/2022/07/no-internet-connection-ui-design.html
+* */
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +68,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 //...............................................................................
-                //Full screen Custom Dialog Sample\
+                //Full screen Custom Dialog Sample
                 NoInternetScreen(openFullDialogCustom)
 
             }
@@ -76,8 +79,10 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalComposeUiApi::class)
     @Composable
     private fun NoInternetScreen(openFullDialogCustom: MutableState<Boolean>) {
+
         if (openFullDialogCustom.value) {
 
+            // Dialog function
             Dialog(
                 onDismissRequest = {
                     openFullDialogCustom.value = false
@@ -141,7 +146,8 @@ class MainActivity : ComponentActivity() {
                             gradientColors = gradientColor,
                             cornerRadius = cornerRadius,
                             nameButton = "Try again",
-                            roundedCornerShape = RoundedCornerShape(topStart = 30.dp,bottomEnd = 30.dp)
+                            roundedCornerShape = RoundedCornerShape(topStart = 30.dp,bottomEnd = 30.dp),
+                            openFullDialogCustom
                         )
 
                     }
@@ -161,7 +167,8 @@ fun GradientButton(
     gradientColors: List<Color>,
     cornerRadius: Dp,
     nameButton: String,
-    roundedCornerShape: RoundedCornerShape
+    roundedCornerShape: RoundedCornerShape,
+    openFullDialogCustom: MutableState<Boolean>
 ) {
 
     Button(
@@ -169,7 +176,7 @@ fun GradientButton(
             .fillMaxWidth()
             .padding(start = 32.dp, end = 32.dp),
         onClick = {
-            //your code
+            openFullDialogCustom.value = false
         },
 
         contentPadding = PaddingValues(),
